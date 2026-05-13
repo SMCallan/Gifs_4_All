@@ -113,6 +113,7 @@ let isTunePlaying = false;
 let messageIndex = 0;
 let tuneTimeout;
 let activeOscillators = [];
+let masterGain;
 
 function randomItem(items) {
   return items[Math.floor(Math.random() * items.length)];
@@ -143,10 +144,19 @@ function setSpotlight(gift, shouldBurst = false) {
   }
 }
 
-function renderGifts() {
-  const shuffledGifts = shuffle(gifts);
+function scrollToSpotlight() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  spotlight.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+    block: "center"
+  });
+}
+
+function renderRandomGifts() {
+  const shuffledGifts = shuffle(gifts).slice(0, 4);
   giftGrid.innerHTML = "";
-  giftCount.textContent = `${gifts.length} surprises loaded`;
+  giftCount.textContent = `4 pulled from ${gifts.length}`;
 
   shuffledGifts.forEach((gift, index) => {
     const card = document.createElement("button");
@@ -164,10 +174,13 @@ function renderGifts() {
     title.textContent = gift.title;
 
     const helper = document.createElement("small");
-    helper.textContent = "Tap to spotlight";
+    helper.textContent = "Open above";
 
     card.append(img, title, helper);
-    card.addEventListener("click", () => setSpotlight(gift, true));
+    card.addEventListener("click", () => {
+      setSpotlight(gift, true);
+      scrollToSpotlight();
+    });
     giftGrid.append(card);
   });
 }
@@ -237,7 +250,7 @@ function playNote(context, frequency, start, duration) {
   gain.gain.exponentialRampToValueAtTime(0.0001, start + duration - 0.03);
 
   oscillator.connect(gain);
-  gain.connect(context.destination);
+  gain.connect(masterGain);
   oscillator.start(start);
   oscillator.stop(start + duration);
   activeOscillators.push(oscillator);
@@ -248,6 +261,12 @@ function playNote(context, frequency, start, duration) {
 
 function scheduleTune() {
   const context = audioContext;
+
+  if (!context || context.state === "closed") {
+    stopTune();
+    return;
+  }
+
   let time = context.currentTime + 0.05;
   const beatMs = 420;
 
@@ -287,32 +306,49 @@ async function toggleTune() {
     return;
   }
 
-  audioContext = audioContext || new AudioContext();
+  const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
 
-  if (audioContext.state === "suspended") {
-    await audioContext.resume();
+  if (!AudioContextCtor) {
+    tuneLabel.textContent = "Tune unavailable";
+    return;
   }
 
-  isTunePlaying = true;
-  tuneBtn.setAttribute("aria-pressed", "true");
-  tuneLabel.textContent = "Stop tune";
-  tuneBtn.querySelector(".control-icon").textContent = "stop";
-  scheduleTune();
+  try {
+    audioContext = audioContext || new AudioContextCtor();
+    masterGain = masterGain || audioContext.createGain();
+    masterGain.gain.setValueAtTime(0.9, audioContext.currentTime);
+    masterGain.connect(audioContext.destination);
+
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
+
+    isTunePlaying = true;
+    tuneBtn.setAttribute("aria-pressed", "true");
+    tuneLabel.textContent = "Stop tune";
+    tuneBtn.querySelector(".control-icon").textContent = "stop";
+    scheduleTune();
+  } catch (error) {
+    console.error("Unable to start birthday tune", error);
+    stopTune();
+    tuneLabel.textContent = "Try tune again";
+  }
 }
 
 pullBtn.addEventListener("click", () => {
   setSpotlight(randomItem(gifts), true);
+  scrollToSpotlight();
 });
 
 shuffleBtn.addEventListener("click", () => {
-  renderGifts();
+  renderRandomGifts();
   burstFromElement(shuffleBtn);
 });
 
 tuneBtn.addEventListener("click", toggleTune);
 
 buildConfetti();
-renderGifts();
+renderRandomGifts();
 setSpotlight(randomItem(gifts));
 showNextTitleMessage();
 window.setInterval(showNextTitleMessage, 7600);

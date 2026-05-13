@@ -42,10 +42,6 @@
         </a>
 
         <nav class="top-actions" aria-label="Birthday controls">
-          <button class="control-button secondary" id="shuffleBtn" type="button">
-            <span class="control-icon" aria-hidden="true">mix</span>
-            <span>Shuffle</span>
-          </button>
           <button
             class="control-button"
             id="tuneBtn"
@@ -93,10 +89,16 @@
         <section class="gift-wall" aria-labelledby="giftWallTitle">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Random gifts</p>
-              <h2 id="giftWallTitle">Gift pile</h2>
+              <p class="eyebrow">Four fresh pulls</p>
+              <h2 id="giftWallTitle">A little extra luck</h2>
             </div>
-            <p class="gift-count" id="giftCount">10 surprises loaded</p>
+            <div class="section-actions">
+              <p class="gift-count" id="giftCount">4 pulled at random</p>
+              <button class="control-button secondary mini-shuffle" id="shuffleBtn" type="button">
+                <span class="control-icon" aria-hidden="true">mix</span>
+                <span>Shuffle four</span>
+              </button>
+            </div>
           </div>
 
           <div class="gift-grid" id="giftGrid"></div>
