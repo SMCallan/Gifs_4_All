@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Bag of Gifs is a playful birthday site packed with random animated surprises and a birthday tune."
+    />
+    <title>Bag of Gifs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="confetti-layer" aria-hidden="true"></div>
+
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Bag of Gifs home">
+          <span class="brand-mark" aria-hidden="true">BG</span>
+          <span>
+            <span class="brand-name">Bag of Gifs</span>
+            <span class="brand-kicker">Birthday mode</span>
+          </span>
+        </a>
+
+        <nav class="top-actions" aria-label="Birthday controls">
+          <button class="control-button secondary" id="shuffleBtn" type="button">
+            <span class="control-icon" aria-hidden="true">mix</span>
+            <span>Shuffle</span>
+          </button>
+          <button
+            class="control-button"
+            id="tuneBtn"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="control-icon" aria-hidden="true">play</span>
+            <span class="tune-label">Play tune</span>
+          </button>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="party-stage" aria-labelledby="stageTitle">
+          <div class="bag-column">
+            <div class="gif-bag" aria-hidden="true">
+              <div class="bag-handle"></div>
+              <div class="bag-body">
+                <span>GIFS</span>
+              </div>
+              <div class="bag-shadow"></div>
+            </div>
+            <button class="pull-button" id="pullBtn" type="button">
+              Pull a gif
+            </button>
+          </div>
+
+          <div class="spotlight">
+            <p class="eyebrow">Now playing</p>
+            <h1 id="stageTitle">Bag of Gifs</h1>
+            <p class="rotating-message" id="titleMessage" aria-live="polite"></p>
+            <figure class="spotlight-frame">
+              <img
+                id="spotlightGif"
+                src="Bag%20of%20gifs/%20-12.gif"
+                alt="A random birthday gif"
+              />
+            </figure>
+            <figcaption class="spotlight-caption" id="spotlightCaption">
+              Birthday jackpot
+            </figcaption>
+          </div>
+        </section>
+
+        <section class="gift-wall" aria-labelledby="giftWallTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Random gifts</p>
+              <h2 id="giftWallTitle">Gift pile</h2>
+            </div>
+            <p class="gift-count" id="giftCount">10 surprises loaded</p>
+          </div>
+
+          <div class="gift-grid" id="giftGrid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
