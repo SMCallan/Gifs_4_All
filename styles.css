@@ -498,6 +498,119 @@ h2 {
   font-weight: 800;
 }
 
+.letter-section {
+  padding: 64px 0 8px;
+}
+
+.birthday-letter {
+  position: relative;
+  width: min(820px, 100%);
+  margin: 0 auto;
+  padding: 44px 52px 46px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(255, 95, 87, 0.14) 0 8px, transparent 8px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 242, 207, 0.78)),
+    var(--paper);
+  box-shadow: 12px 14px 0 rgba(23, 18, 15, 0.2);
+  color: var(--ink);
+}
+
+.birthday-letter::before {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(23, 18, 15, 0.12);
+  border-radius: 6px;
+  content: "";
+  pointer-events: none;
+}
+
+.letter-stamp {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  display: grid;
+  width: 58px;
+  height: 48px;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--lemon);
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--coral);
+  font-size: 1.35rem;
+  font-weight: 1000;
+  transform: rotate(4deg);
+}
+
+.letter-kicker,
+.letter-date,
+.teaching-number {
+  margin: 0;
+  color: var(--plum);
+  font-size: 0.82rem;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.birthday-letter h2 {
+  width: min(12ch, calc(100% - 82px));
+  margin-top: 8px;
+  font-size: 3.4rem;
+}
+
+.letter-date {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.letter-salutation {
+  margin-top: 34px;
+  font-size: 1.45rem;
+  font-weight: 1000;
+}
+
+.birthday-letter p {
+  max-width: 62ch;
+  margin: 18px 0 0;
+  font-size: 1.08rem;
+  font-weight: 720;
+  line-height: 1.78;
+}
+
+.letter-teaching {
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 2px solid rgba(23, 18, 15, 0.12);
+}
+
+.letter-teaching h3 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.letter-closing {
+  margin-top: 38px;
+  padding-top: 28px;
+  border-top: 2px solid rgba(23, 18, 15, 0.12);
+}
+
+.letter-closing p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.letter-closing .signature {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 2.4rem;
+  font-weight: 1000;
+}
+
 .burst {
   position: fixed;
   z-index: 3;
@@ -576,6 +689,14 @@ h2 {
   .gift-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .birthday-letter {
+    padding: 38px 34px 40px;
+  }
+
+  .birthday-letter h2 {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 540px) {
@@ -627,6 +748,35 @@ h2 {
 
   .gift-grid {
     grid-template-columns: 1fr;
+  }
+
+  .letter-section {
+    padding-top: 44px;
+  }
+
+  .birthday-letter {
+    padding: 32px 22px 34px;
+    box-shadow: 7px 8px 0 rgba(23, 18, 15, 0.18);
+  }
+
+  .letter-stamp {
+    position: static;
+    margin-bottom: 20px;
+    transform: rotate(0deg);
+  }
+
+  .birthday-letter h2 {
+    width: 100%;
+    font-size: 2.25rem;
+  }
+
+  .birthday-letter p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .letter-teaching h3 {
+    font-size: 1.45rem;
   }
 }
 
