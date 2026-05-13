@@ -1,55 +1,51 @@
-const gifts = [
-  {
-    src: "Bag%20of%20gifs/%20-12.gif",
-    title: "Pocket party",
-    alt: "Animated birthday surprise from the gift bag"
-  },
-  {
-    src: "Bag%20of%20gifs/%20-13.gif",
-    title: "Cake table chaos",
-    alt: "Animated celebratory gif"
-  },
-  {
-    src: "Bag%20of%20gifs/%20-14.gif",
-    title: "Confetti rush",
-    alt: "Animated party gif"
-  },
-  {
-    src: "Bag%20of%20gifs/%20-15.gif",
-    title: "Big grin delivery",
-    alt: "Animated happy birthday gif"
-  },
-  {
-    src: "Bag%20of%20gifs/%20-16.gif",
-    title: "Surprise loop",
-    alt: "Animated surprise birthday gif"
-  },
-  {
-    src: "Bag%20of%20gifs/Bunny%20Claws.gif",
-    title: "Bunny claws",
-    alt: "Animated bunny gif"
-  },
-  {
-    src: "Bag%20of%20gifs/__.gif",
-    title: "Double underscore magic",
-    alt: "Animated playful gif"
-  },
-  {
-    src: "Bag%20of%20gifs/funny%20weird%20gif.gif",
-    title: "Funny weird present",
-    alt: "Animated funny weird gif"
-  },
-  {
-    src: "Bag%20of%20gifs/tumblr_m6yx0gNLiQ1rt28efo1_500_gif%20(450%C3%97457).gif",
-    title: "Tumblr time capsule",
-    alt: "Animated retro gif"
-  },
-  {
-    src: "Bag%20of%20gifs/%E1%83%A6%E2%99%A5%E1%83%A6%E2%99%A1%E1%83%A6%E2%99%A5%E1%83%A6Pockemom%E2%99%A1%E1%83%A6%E2%99%A5%E1%83%A6%E2%99%A1.gif",
-    title: "Pockemom power",
-    alt: "Animated character gif"
-  }
+const giftSources = [
+  "Bag%20of%20gifs/%20-12.gif",
+  "Bag%20of%20gifs/%20-13.gif",
+  "Bag%20of%20gifs/%20-14.gif",
+  "Bag%20of%20gifs/%20-15.gif",
+  "Bag%20of%20gifs/%20-16.gif",
+  "Bag%20of%20gifs/%20-17.gif",
+  "Bag%20of%20gifs/__.gif",
+  "Bag%20of%20gifs/%23dragon%20ball%20z%20%23master%20roshi.gif",
+  "Bag%20of%20gifs/A.gif",
+  "Bag%20of%20gifs/B.gif",
+  "Bag%20of%20gifs/Bunny%20Claws.gif",
+  "Bag%20of%20gifs/C.gif",
+  "Bag%20of%20gifs/cv.gif",
+  "Bag%20of%20gifs/D.gif",
+  "Bag%20of%20gifs/d%5B'l'%5Db%20Jim%20Henson%20~%20The%20Dark%20Crystal.gif",
+  "Bag%20of%20gifs/David%20Bowie%20Faces%20GIF%20-%20David%20Bowie%20Faces%20Expression%20-%20Discover%20%26%20Share%20GIFs.gif",
+  "Bag%20of%20gifs/df.gif",
+  "Bag%20of%20gifs/E.gif",
+  "Bag%20of%20gifs/favd_worldsbestvideogames-May%2030%202016%20at%2008_23AM.gif",
+  "Bag%20of%20gifs/FI4ERMWK7MCOQU4_gif.gif",
+  "Bag%20of%20gifs/Fire%20Nutsonfire%20GIF%20-%20Fire%20Nutsonfire%20-%20Discover%20%26%20Share%20GIFs.gif",
+  "Bag%20of%20gifs/funny%20weird%20gif.gif",
+  "Bag%20of%20gifs/GIF%20from%20GIFER.gif",
+  "Bag%20of%20gifs/GOOD%20NIGHT%20%E2%99%A1.gif",
+  "Bag%20of%20gifs/JOHNNY%20BRAVO.gif",
+  "Bag%20of%20gifs/NeverEnding%20Story%20(1984)%20flick_%20flying%20high%20on%20the%20cutest%20monster%20dragon%20ever%20%3B%20)%20(by%20GoMediaArsenal%20gifs_com_DAP).gif",
+  "Bag%20of%20gifs/NO%20NO%20NO%F0%9F%A4%A3%F0%9F%A4%A3%F0%9F%A4%A3.jpg",
+  "Bag%20of%20gifs/Panthe%CC%80re%20Rose.gif",
+  "Bag%20of%20gifs/Shrek%20Shrek%20Meme%20GIF%20-%20Shrek%20Shrek%20meme%20Shrek%20staring%20-%20Discover%20%26%20Share%20GIFs.gif",
+  "Bag%20of%20gifs/sweeter%20than%20sugar.gif",
+  "Bag%20of%20gifs/tumblr_m6yx0gNLiQ1rt28efo1_500_gif%20(450%C3%97457).gif",
+  "Bag%20of%20gifs/xc.gif",
+  "Bag%20of%20gifs/xx.gif",
+  "Bag%20of%20gifs/xz.gif",
+  "Bag%20of%20gifs/zx.gif",
+  "Bag%20of%20gifs/%E1%83%A6%E2%99%A5%E1%83%A6%E2%99%A1%E1%83%A6%E2%99%A5%E1%83%A6Pockemom%E2%99%A1%E1%83%A6%E2%99%A5%E1%83%A6%E2%99%A1.gif"
 ];
+
+const gifts = giftSources.map((src, index) => {
+  const title = makeGiftTitle(src, index);
+
+  return {
+    src,
+    title,
+    alt: `Birthday gift: ${title}`
+  };
+});
 
 const confettiColors = ["#ff5f57", "#13b5c8", "#ffd447", "#37c58f", "#6f3cc3", "#2867f0"];
 const noteMap = {
@@ -121,6 +117,22 @@ let isTunePlaying = false;
 let messageIndex = 0;
 let tuneTimeout;
 let activeOscillators = [];
+
+function makeGiftTitle(src, index) {
+  const filename = decodeURIComponent(src.split("/").pop() || "");
+  const cleaned = filename
+    .normalize("NFC")
+    .replace(/\.[^.]+$/, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+GIF$/i, "")
+    .replace(/\s*Discover\s*&\s*Share\s*GIFs$/i, "")
+    .replace(/#\s*/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/^[\s.-]+|[\s.-]+$/g, "")
+    .trim();
+
+  return cleaned || `Mystery gift ${index + 1}`;
+}
 
 function randomItem(items) {
   return items[Math.floor(Math.random() * items.length)];
